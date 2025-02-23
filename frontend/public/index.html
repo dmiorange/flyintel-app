@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyIntel - Elevatex-Style Flight Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-rotatedmarker/leaflet.rotatedMarker.min.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Sidebar -->
+    <aside class="w-64 h-full fixed bg-gray-800 p-5 overflow-y-auto" id="sidebar">
+        <h2 class="text-2xl font-bold mb-4">Filters</h2>
+        <div>
+            <label>Airline:</label>
+            <input type="text" id="filterAirline" class="input" placeholder="e.g., Delta">
+        </div>
+        <div>
+            <label>Aircraft Type:</label>
+            <input type="text" id="filterAircraft" class="input" placeholder="e.g., B738">
+        </div>
+        <div>
+            <label>Altitude (ft):</label>
+            <input type="number" id="filterAltitude" class="input" placeholder="> 30000">
+        </div>
+        <div>
+            <label>Status:</label>
+            <select id="filterStatus" class="input" title="Flight Status">
+                <option value="">All</option>
+                <option value="departure">Departure</option>
+                <option value="enroute">Enroute</option>
+                <option value="arriving">Arriving</option>
+                <option value="landed">Landed</option>
+            </select>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="ml-64">
+        <header class="p-4 bg-gray-700 flex justify-between items-center shadow-lg">
+            <h1 class="text-3xl font-bold">FlyIntel - Live Flight Tracker</h1>
+            <input type="text" id="searchBar" class="input w-1/3" placeholder="Search Flights...">
+        </header>
+        <div id="map" class="h-[calc(100vh-80px)]"></div>
+    </div>
+
+    <!-- Flight Details Popup -->
+    <div id="flightDetailsPopup" class="hidden fixed right-5 top-20 bg-gray-800 p-6 rounded-lg shadow-2xl w-96 animate-fadeIn">
+        <div class="popup-content">
+            <h3 class="text-2xl font-semibold" id="popup-callsign"></h3>
+            <p><strong>From:</strong> <span id="popup-departure">Unknown</span></p>
+            <p><strong>To:</strong> <span id="popup-arrival">Unknown</span></p>
+            <p><strong>Aircraft:</strong> <span id="popup-aircraft">Unknown</span></p>
+            <p><strong>Altitude:</strong> <span id="popup-altitude">0</span> ft</p>
+            <p><strong>Speed:</strong> <span id="popup-speed">0</span> kts</p>
+            <p><strong>Status:</strong> <span id="popup-status">Unknown</span></p>
+            <p><strong>Squawk:</strong> <span id="popup-squawk">0000</span></p>
+            <p><strong>Route:</strong> <span id="popup-route">Unknown</span></p>
+            <button onclick="closeFlightDetails()" class="bg-red-500 mt-4 px-4 py-2 rounded w-full">Close</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
